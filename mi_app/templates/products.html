@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+
+{% block container %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='products.css') }}">
+
+<div class="products-container">
+    <h1>Crear nuevo Producto <a href="{{ url_for('catalog.create_product') }}">Formulario</a></h1>
+    {% for product_id in products.pageItems  %}
+        <div class="product-item">
+            <h2>
+                <a href="{{ url_for('catalog.product', id=product_id) }}">{{ products.pageItems[product_id].name }}</a>
+                <small> -> Precio (€): {{ products.pageItems[product_id].price }} - 
+                Categoría: {{ products.pageItems[product_id].category }}</small>
+            </h2>
+        </div>
+    {% endfor %}
+
+    {% if products.prevPage %}
+        <a href="{{ url_for('catalog.products', page=products.prevPage) }}"> &lt;&lt; Previous Page</a>
+    {% else %}
+        &lt;&lt; Previous Page
+    {% endif %}
+    |
+    {% if products.nextPage %}
+        <a href="{{ url_for('catalog.products', page=products.nextPage) }}">Next page &gt;&gt;</a>
+    {% else %}
+        Next page &gt;&gt;
+    {% endif %}
+</div>
+{% endblock %}

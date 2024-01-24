@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block container %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
+
+  <div id="container">
+    <h1>CRUD NFT</h1>
+    {% if current_user.is_authenticated %}
+      <h3>Bienvenido {{ current_user.username }}!!</h3>
+      <a href="{{ url_for('catalog.products') }}">Click aqui para ir a los productos</a>
+    {% else %}
+      Click aqui para <a href="{{ url_for('catalog.login') }}">iniciar sesion</a> 
+      o <a href="{{ url_for('catalog.register') }}">registrate</a>
+    {% endif %}
+  </div>
+{% endblock %}
